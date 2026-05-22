@@ -1,0 +1,8 @@
+torch
+torchvision
+transformers
+pillow
+qdrant-client
+fastapi
+uvicorn
+datasets
