@@ -14,6 +14,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.search import (
     _get_embedder,
@@ -23,7 +24,7 @@ from src.search import (
 
 # =========================
 # Response Models
-# =========================
+# ========================
 
 
 class SearchResult(BaseModel):
@@ -98,6 +99,13 @@ app = FastAPI(
     description=("Semantic image search using " "CLIP embeddings + Qdrant."),
     version="1.0.0",
     lifespan=lifespan,
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
